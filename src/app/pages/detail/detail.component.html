@@ -1,0 +1,9 @@
+<h2>Details</h2>
+<hr />
+<p>{{ (country$ | async)?.country }} </p>
+<p>{{ (country$ | async)?.participations?.length }} entries</p>
+<p>{{ totalMedals$ | async }} medailles</p>
+<p>{{ totalAthletes$ | async }} athletes</p>
+<ngx-charts-line-chart [results]="lineChartData$ | async" [view]="[700, 300]" [timeline]="true" [legend]="true"
+    [xAxis]="true" [yAxis]="true" [showGridLines]="true" [showXAxisLabel]="true"
+    [showYAxisLabel]="true"></ngx-charts-line-chart>
