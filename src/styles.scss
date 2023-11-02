@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background-color: ghostwhite;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    background-color: darkcyan;
+    border-color: darkcyan;
+    border-style: solid;
+    border-radius: 0.5rem;
+    margin: auto;
+    padding: 0.2em;
+    font-weight: lighter;
+    display: inline-block;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.infos {
+    border-color: darkcyan;
+    border-style: solid;
+    border-radius: 0.5rem;
+    margin: 1em;
+    padding: 0.8em;
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+    .container {
+        flex-direction: column;
+    }
+
+    .infos {
+        margin: 1em auto;
+    }
+}

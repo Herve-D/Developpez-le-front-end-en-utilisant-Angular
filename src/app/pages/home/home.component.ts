@@ -15,6 +15,11 @@ export class HomeComponent implements OnInit {
   joCount$: Observable<number> = of();
   countryIds!: Map<string, number>;
 
+  // Pie Chart options
+  labels: boolean = true;
+  legend: boolean = false;
+  trimLabels: boolean = false;
+
   constructor(private olympicService: OlympicService, private router: Router) { }
 
   ngOnInit(): void {

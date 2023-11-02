@@ -15,12 +15,8 @@ export class OlympicService {
 
   loadInitialData(): Observable<Olympic[]> {
     return this.olympics$ = this.http.get<Olympic[]>(this.olympicUrl).pipe(
-      catchError((error, caught) => {
-        // TODO: improve error handling
-        console.error(error);
-        ErrorHandler
-        // can be useful to end loading state and let the user know something went wrong
-        return caught;
+      catchError((error) => {
+        throw error;
       })
     );
   }
@@ -34,7 +30,7 @@ export class OlympicService {
       map(olympics => olympics.find(olympic => olympic.id === countryId)),
       map(country => {
         if (!country) {
-          throw new Error('Pays non trouvé...');
+          throw new Error();
         }
         return country;
       })

@@ -1,6 +1,15 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (medalsCount$ | async)?.length }} countries</p>
-<p>{{ joCount$ | async }} JOs</p>
-<ngx-charts-pie-chart [results]="medalsCount$ | async" [labels]="true" [legend]="true"
-    (select)="onSelect($event)"></ngx-charts-pie-chart>
+<h1>Medals per Country</h1>
+<div class="container">
+    <div class="infos">
+        <div>Number of JOs</div>
+        <strong>{{ joCount$ | async }}</strong>
+    </div>
+    <div class="infos">
+        <div>Number of countries</div>
+        <strong>{{ (medalsCount$ | async)?.length }}</strong>
+    </div>
+</div>
+<div>
+    <ngx-charts-pie-chart [results]="medalsCount$ | async" [labels]="labels" [legend]="legend" [trimLabels]="trimLabels"
+        (select)="onSelect($event)"></ngx-charts-pie-chart>
+</div>

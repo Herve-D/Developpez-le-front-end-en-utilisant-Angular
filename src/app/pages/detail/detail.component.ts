@@ -16,6 +16,13 @@ export class DetailComponent implements OnInit {
     totalMedals$: Observable<number> = of();
     totalAthletes$: Observable<number> = of();
 
+    // Line Chart options
+    autoScale: boolean = true;
+    xAxis: boolean = true;
+    yAxis: boolean = true;
+    showXAxisLabel: boolean = true;
+    xAxisLabel: string = 'Dates';
+
     constructor(private olympicService: OlympicService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
