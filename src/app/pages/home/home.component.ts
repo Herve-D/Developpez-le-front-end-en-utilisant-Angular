@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   medalsCount$: Observable<DataItem[]> = of();
   joCount$: Observable<number> = of();
-  countryIds!: Map<string, number>;
+  olympicIDs!: Map<string, number>;
 
   // Pie Chart options
   labels: boolean = true;
@@ -22,9 +22,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private olympicService: OlympicService, private router: Router) { }
 
+  // Chargement des données pour le Line Chart
   ngOnInit(): void {
-    const ols = this.olympicService.getOlympics();
-    this.medalsCount$ = ols.pipe(last(), map(
+    const olympics = this.olympicService.loadInitialData();
+    this.medalsCount$ = olympics.pipe(last(), map(
       olympics => {
         return olympics.map(olympic => ({
           name: olympic.country,
@@ -32,12 +33,13 @@ export class HomeComponent implements OnInit {
         }) as DataItem);
       }
     ));
-    this.joCount$ = this.countJos(ols);
-    this.countryIds = this.getCountryIds(ols);
+    this.joCount$ = this.countJOs(olympics);
+    this.olympicIDs = this.getOlympicIDs(olympics);
   }
 
-  countJos(ols: Observable<Olympic[]>): Observable<number> {
-    return ols.pipe(
+  // Décompte du nombre de JO
+  countJOs(olympics: Observable<Olympic[]>): Observable<number> {
+    return olympics.pipe(
       mergeMap(olympics => olympics),
       mergeMap(olympic => olympic.participations),
       distinct(participation => participation.year),
@@ -45,23 +47,26 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getCountryIds(ols: Observable<Olympic[]>): Map<string, number> {
-    const mapIds = new Map();
-    ols.forEach(olympics => {
+  // Récupération des IDs de chaque pays
+  getOlympicIDs(olympics: Observable<Olympic[]>): Map<string, number> {
+    const mapIDs = new Map();
+    olympics.forEach(olympics => {
       olympics.map(olympic => {
-        mapIds.set(olympic.country, olympic.id);
+        mapIDs.set(olympic.country, olympic.id);
       })
     });
-    return mapIds;
+    return mapIDs;
   }
 
+  // Navigation vers la page Detail du pays sélectionné
   onSelect(event: DataItem): void {
-    const countryId = this.findCountryId(event.name.toString());
-    this.router.navigateByUrl(`detail/${countryId}`);
+    const olympicId = this.findOlympicId(event.name.toString());
+    this.router.navigateByUrl(`detail/${olympicId}`);
   }
 
-  findCountryId(name: string): number | undefined {
-    return this.countryIds.get(name);
+  // Récupération de l'ID par le nom du pays
+  findOlympicId(name: string): number | undefined {
+    return this.olympicIDs.get(name);
   }
 
 }

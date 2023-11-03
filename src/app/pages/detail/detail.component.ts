@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
-    country$: Observable<Olympic> = of();
+    olympic$: Observable<Olympic> = of();
     lineChartData$: Observable<Series[]> = of();
     totalMedals$: Observable<number> = of();
     totalAthletes$: Observable<number> = of();
@@ -26,24 +26,26 @@ export class DetailComponent implements OnInit {
     constructor(private olympicService: OlympicService, private route: ActivatedRoute) { }
 
     ngOnInit(): void {
-        const countryId = +this.route.snapshot.params['id'];
-        this.getCountry(countryId);
-        this.totalMedals$ = this.getTotal(this.country$, 'medalsCount');
-        this.totalAthletes$ = this.getTotal(this.country$, 'athleteCount');
+        const olympicId = +this.route.snapshot.params['id'];
+        this.getOlympic(olympicId);
+        this.totalMedals$ = this.getTotal(this.olympic$, 'medalsCount');
+        this.totalAthletes$ = this.getTotal(this.olympic$, 'athleteCount');
     }
 
-    getCountry(countryId: number): void {
-        this.country$ = this.olympicService.getCountryById(countryId);
-        this.lineChartData$ = this.country$.pipe(
-            map(country => this.getLineChartData(country))
+    // Récupération des données du pays Olympique
+    getOlympic(olympicId: number): void {
+        this.olympic$ = this.olympicService.getOlympicById(olympicId);
+        this.lineChartData$ = this.olympic$.pipe(
+            map(olympic => this.getLineChartData(olympic))
         );
     }
 
-    getLineChartData(country: Olympic): Series[] {
+    // Création données du Line Chart
+    getLineChartData(olympic: Olympic): Series[] {
         return [
             {
-                name: country.country,
-                series: country.participations.map(participation => ({
+                name: olympic.country,
+                series: olympic.participations.map(participation => ({
                     name: participation.year.toString(),
                     value: participation.medalsCount
                 }))
@@ -51,9 +53,10 @@ export class DetailComponent implements OnInit {
         ];
     }
 
-    getTotal(country: Observable<Olympic>, property: 'medalsCount' | 'athleteCount'): Observable<number> {
-        return country.pipe(
-            map(country => country.participations.reduce(
+    // Comptabiliser le total de médailles/d'athlètes
+    getTotal(olympic: Observable<Olympic>, property: 'medalsCount' | 'athleteCount'): Observable<number> {
+        return olympic.pipe(
+            map(olympic => olympic.participations.reduce(
                 (acc, participation) => acc + participation[property], 0)
             )
         );

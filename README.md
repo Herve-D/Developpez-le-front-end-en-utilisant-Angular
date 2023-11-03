@@ -1,29 +1,20 @@
-# OlympicGamesStarter
+# Olympic Games
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Voici une application qui met à disposition les informations de précédents Jeux Olympiques.
 
-Don't forget to install your node_modules before starting (`npm install`).
+Vous trouverez une page d'accueil présentant le nombre de médailles totales pour chaque pays, sous forme de "Pie Chart".
+Vient ensuite l'accès à une page de détails pour un pays sélectionné, accompagné d'un "Line Chart".
 
-## Development server
+Les graphiques sont construits grâce à la librairie NGX-CHARTS https://swimlane.github.io/ngx-charts/
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Build
+## Déploiement de l'application
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Where to start
-
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
-
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
-
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
-
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
-
-You're now ready to implement the requested features.
-
-Good luck!
+ 1- Cloner le dépôt GitHub : https://github.com/Herve-D/Developpez-le-front-end-en-utilisant-Angular.git
+ 2- S'assurer d'avoir installé :
+    2.1- Node et npm : https://nodejs.org/fr/
+    2.2- CLI d'Angular : `npm i -g @angular/cli`
+    2.3- node_modules : `npm install`
+ 3- Lancer un serveur de développement via : `ng serve`
+ 4- Ouvrir un navigateur à l'adresse : http://localhost:4200/
+ 

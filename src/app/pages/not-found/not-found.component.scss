@@ -2,7 +2,13 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
+  margin: auto;
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
 }

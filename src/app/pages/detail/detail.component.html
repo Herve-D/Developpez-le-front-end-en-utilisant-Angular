@@ -1,9 +1,9 @@
 <button routerLink="">🏠 Home</button>
-<h1>{{ (country$ | async)?.country }} </h1>
+<h1>{{ (olympic$ | async)?.country }} </h1>
 <div class="container">
     <div class="infos">
         <div>Number of entries</div>
-        <strong>{{ (country$ | async)?.participations?.length }}</strong>
+        <strong>{{ (olympic$ | async)?.participations?.length }}</strong>
     </div>
     <div class="infos">
         <div>Total number medals</div>

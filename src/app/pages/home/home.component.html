@@ -11,5 +11,10 @@
 </div>
 <div>
     <ngx-charts-pie-chart [results]="medalsCount$ | async" [labels]="labels" [legend]="legend" [trimLabels]="trimLabels"
-        (select)="onSelect($event)"></ngx-charts-pie-chart>
+        (select)="onSelect($event)">
+        <ng-template #tooltipTemplate let-model="model">
+            {{model.name}} <br>
+            🏅 {{model.value}}
+        </ng-template>
+    </ngx-charts-pie-chart>
 </div>
