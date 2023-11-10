@@ -15,11 +15,7 @@ export class OlympicService {
 
   // Chargement des données
   loadInitialData(): Observable<Olympic[]> {
-    return this.olympics$ = this.http.get<Olympic[]>(this.olympicUrl).pipe(
-      catchError((error) => {
-        throw error;
-      })
-    );
+    return this.olympics$ = this.http.get<Olympic[]>(this.olympicUrl);
   }
 
   // Récupère un objet Olympic via ID
